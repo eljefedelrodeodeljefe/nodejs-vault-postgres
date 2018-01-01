@@ -1,0 +1,35 @@
+{
+  "name": "nodejs-vault-postgres",
+  "version": "0.1.0",
+  "description": "A tutorial how to rotate secrets for critical infrastructure components with Node.js and Vault.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape 'test/**/*.spec.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eljefedelrodeodeljefe/nodejs-vault-postgres.git"
+  },
+  "keywords": [
+    "node",
+    "postgres",
+    "postgresql",
+    "vault",
+    "secret",
+    "secrets",
+    "secure"
+  ],
+  "author": "Robert Jefe Lindstaedt <robert.lindstaedt@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eljefedelrodeodeljefe/nodejs-vault-postgres/issues"
+  },
+  "homepage": "https://github.com/eljefedelrodeodeljefe/nodejs-vault-postgres#readme",
+  "devDependencies": {
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
