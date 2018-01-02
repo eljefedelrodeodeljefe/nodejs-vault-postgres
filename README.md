@@ -1,6 +1,6 @@
-# Secure Infracsture with Node.js and Vault
+# Secure Infrastructure with Node.js and Vault
 
-> A tutorial how to rotate secrets for critical infrastructure components with Node.js and Vault.
+> A tutorial how to rotate secrets for critical infrastructure components via Vault with Node.js applications.
 
 ## TL;DR
 
