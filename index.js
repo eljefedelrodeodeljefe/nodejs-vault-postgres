@@ -1,18 +1,13 @@
 const debug = require('debug')('demo-main')
-// const initVault = require('./lib/vault-init')
-const getApiUserCreds = require('./lib/get-api-user-credentials')
+const express = require('express')
+const app = express()
 
-async function main () {
-  // await initVault()
-  let credentials
-  try {
-    credentials = await getApiUserCreds()
-  } catch (err) {
-    debug(err)
-    return
-  }
+app.get('/api/v0/transactions', require('./lib/handlers/transactions/get').all)
+app.get('/api/v0/transactions/:id', require('./lib/handlers/transactions/get').one)
 
-  debug(credentials)
-}
+app.listen(3000, () => debug('Example app listening on port 3000!'))
 
-main()
+process.on('unhandledRejection', (reason, p) => {
+  debug('Unhandled Rejection at:', p, 'reason:', reason)
+  console.log('Fatal crash')
+})
