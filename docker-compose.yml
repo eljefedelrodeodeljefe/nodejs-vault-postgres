@@ -1,0 +1,52 @@
+version: '2'
+services:
+  test:
+    build: .
+    environment:
+      - VAULT_ADDR=http://vault:8200
+      # The token will only be injected, because we assume
+      # Vault is already set up and initialised
+      - VAULT_TOKEN=demo-root-token
+    depends_on:
+      - vault
+
+  # For correct configuration and to understand the deomonstration
+  # puporses, see here: https://www.vaultproject.io/guides/generate-root.html
+  vault:
+    image: vault
+    volumes:
+      - $PWD:/tmp
+      - $PWD/logs/:/tmp/logs
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=demo-root-token # this does not exist in production
+    cap_add:
+      - IPC_LOCK
+    command: server -dev # in production: server -config /tmp/example/config.hcl
+    ports:
+      - "8200:8200"
+    depends_on:
+      - postgres
+
+  goldfish:
+    build:
+      context: cluster/goldfish
+      dockerfile: Dockerfile
+    environment:
+      - VAULT_ADDR=http://vault:8200
+      - VAULT_TOKEN=demo-root-token
+    stdin_open: true
+    ports:
+      - "8000:8000"
+    links:
+      - vault
+    depends_on:
+      - vault
+    command: /app/entrypoint.sh
+
+  postgres:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: strongrootpassword
