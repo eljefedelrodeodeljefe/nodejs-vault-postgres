@@ -10,4 +10,5 @@ app.listen(3000, () => debug('Example app listening on port 3000!'))
 process.on('unhandledRejection', (reason, p) => {
   debug('Unhandled Rejection at:', p, 'reason:', reason)
   console.log('Fatal crash')
+  process.exit(1)
 })

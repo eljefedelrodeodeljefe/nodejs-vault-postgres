@@ -18,7 +18,8 @@ services:
       - $PWD:/tmp
       - $PWD/logs/:/tmp/logs
     environment:
-      - VAULT_DEV_ROOT_TOKEN_ID=demo-root-token # this does not exist in production
+      VAULT_ADDR: http://127.0.0.1:8200
+      VAULT_DEV_ROOT_TOKEN_ID: demo-root-token # this does not exist in production
     cap_add:
       - IPC_LOCK
     command: server -dev # in production: server -config /tmp/example/config.hcl
@@ -26,6 +27,20 @@ services:
       - "8200:8200"
     depends_on:
       - postgres
+
+  vault-ui:
+    image: djenriquez/vault-ui
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+      VAULT_URL_DEFAULT: http://vault:8200
+      VAULT_AUTH_DEFAULT: USERNAMEPASSWORD
+    stdin_open: true
+    ports:
+      - "8000:8000"
+    links:
+      - vault
+    depends_on:
+      - vault
 
   postgres:
     image: postgres
