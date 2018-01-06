@@ -27,22 +27,6 @@ services:
     depends_on:
       - postgres
 
-  goldfish:
-    build:
-      context: cluster/goldfish
-      dockerfile: Dockerfile
-    environment:
-      - VAULT_ADDR=http://vault:8200
-      - VAULT_TOKEN=demo-root-token
-    stdin_open: true
-    ports:
-      - "8000:8000"
-    links:
-      - vault
-    depends_on:
-      - vault
-    command: /app/entrypoint.sh
-
   postgres:
     image: postgres
     ports:
