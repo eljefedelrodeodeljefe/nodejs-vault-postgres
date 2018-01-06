@@ -11,6 +11,7 @@
   "watch": [
     "index.js",
     "lib/",
+    "test/",
     "config.js"
   ],
   "env": {
