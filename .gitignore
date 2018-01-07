@@ -2,3 +2,5 @@ node_modules
 logs
 example
 coverage
+.nyc_output
+*.lcov
