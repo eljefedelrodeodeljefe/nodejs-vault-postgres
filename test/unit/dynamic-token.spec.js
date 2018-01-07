@@ -14,7 +14,7 @@ test('Dynamic Token: can instantiate token retrieval', (t) => {
 })
 
 test('Dynamic Token: can provide singleton that is of instance DynamicPool', (t) => {
-  t.plan(8)
+  t.plan(10)
 
   const singleton1 = require('../../lib/helpers/dbs/pg/dynamic-pool')
 
@@ -25,9 +25,12 @@ test('Dynamic Token: can provide singleton that is of instance DynamicPool', (t)
   t.deepEquals(singleton1, singleton2)
   t.ok(Object.is(singleton1, singleton2))
 
-  singleton1._param = true
-  t.equals(singleton1._param, true)
-  t.equals(singleton2._param, true)
+  singleton1.isDirty = true
+  t.equals(singleton1.isDirty, true)
+  t.equals(singleton2.isDirty, true)
+  singleton1.isDirty = false
+  t.equals(singleton1.isDirty, false)
+  t.equals(singleton2.isDirty, false)
 
   const pool1 = new DynamicPool()
   const pool2 = new DynamicPool()
