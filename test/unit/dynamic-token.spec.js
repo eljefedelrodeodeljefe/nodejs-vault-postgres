@@ -1,6 +1,13 @@
 const test = require('tape')
 const sinon = require('sinon')
 const DynamicPool = require('../../lib/helpers/dbs/pg/dynamic-pool/pool')
+const createAndGetAPIUserCredentials = require('../../lib/helpers/vault/get-api-user-credentials')
+
+async function setup () {
+  await createAndGetAPIUserCredentials()
+}
+
+setup()
 
 test('Dynamic Token: can instantiate token retrieval', (t) => {
   t.plan(2)
